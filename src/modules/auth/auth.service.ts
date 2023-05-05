@@ -1,14 +1,20 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { LoginDto } from './dto/login.dto';
+import { LoginDto } from './dto/request/login.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from '../user/entities/user.entity';
 import { Repository } from 'typeorm';
-import { TokenPayload, sha512 } from '../../../libs/common/src';
-import { RegisterDto } from './dto/register.dto';
+import {
+  ResponseTransform,
+  TokenPayload,
+  sha512,
+} from '../../../libs/common/src';
+import { RegisterDto } from './dto/request/register.dto';
 import { JwtService } from '@nestjs/jwt';
-import { RedisService, appConfig } from '../../../libs/core/src';
 import { SessionService } from '../session/session.service';
 import { v4 as uuidV4 } from 'uuid';
+import { LoginResponseDto } from 'src/modules/auth/dto/response/login-reponse.dto';
+import { RedisService, appConfig } from '@app/core';
+import { instanceToPlain } from 'class-transformer';
 
 @Injectable()
 export class AuthService {
@@ -45,7 +51,7 @@ export class AuthService {
     });
 
     return {
-      user,
+      user: instanceToPlain(user),
       token: {
         accessToken,
         refreshToken,

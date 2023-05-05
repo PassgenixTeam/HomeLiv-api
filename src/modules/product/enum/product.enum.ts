@@ -1,0 +1,6 @@
+export enum SORT_PRODUCT_BY {
+  NEWEST = 'NEWEST',
+  OLDEST = 'OLDEST',
+  PRICE_ASC = 'PRICE_ASC',
+  PRICE_DESC = 'PRICE_DESC',
+}

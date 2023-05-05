@@ -1,5 +1,6 @@
 import {
   ClassConstructor,
+  instanceToPlain,
   plainToClass,
   plainToInstance,
 } from 'class-transformer';

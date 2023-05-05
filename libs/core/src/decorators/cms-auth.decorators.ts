@@ -4,9 +4,11 @@ import { RolesGuard } from '../guards/roles/roles.guard';
 import { JwtAuthGuard } from '../guards/jwt-auth/jwt-auth.guard';
 import { ApiBearerAuth, ApiUnauthorizedResponse } from '@nestjs/swagger';
 
+export const ROLES_KEY = 'roles';
+
 export const Auth = (...roles: ROLE[]) => {
   return applyDecorators(
-    SetMetadata('roles', roles),
+    SetMetadata(ROLES_KEY, roles),
     UseGuards(JwtAuthGuard, RolesGuard),
     ApiBearerAuth(),
     ApiUnauthorizedResponse({

@@ -8,10 +8,12 @@ import {
   Delete,
 } from '@nestjs/common';
 import { UserService } from './user.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Auth, AuthUser } from '@app/core';
+import { UserEntity } from 'src/modules/user/entities/user.entity';
+import { ROLE } from '@app/common';
+import { UpdateUserDto } from 'src/modules/user/dto/request/update-user.dto';
+import { ProfileResponseDto } from 'src/modules/user/dto/response/profile-response.dto';
 
 @ApiTags('user')
 @Controller('user')
@@ -23,19 +25,31 @@ export class UserController {
     return this.userService.findAll();
   }
 
+  // @Auth()
+  // @Get('me')
+  // me(@AuthUser() user: any) {
+  //   return this.userService.me(user);
+  // }
+
   @Auth()
   @Get('profile')
-  profile(@AuthUser() user: any) {
-    return this.userService.profile(user);
+  @ApiOkResponse({
+    description: 'The record has been successfully get all.',
+    type: ProfileResponseDto,
+  })
+  profile(@AuthUser('id') userId: string) {
+    return this.userService.profile(userId);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.userService.update(+id, updateUserDto);
+  @Patch()
+  @Auth()
+  update(@Body() updateUserDto: UpdateUserDto, @AuthUser('id') userId: string) {
+    return this.userService.update(userId, updateUserDto);
   }
 
   @Delete(':id')
+  @Auth(ROLE.ADMIN)
   remove(@Param('id') id: string) {
-    return this.userService.remove(+id);
+    return this.userService.remove(id);
   }
 }

@@ -7,7 +7,10 @@ export const Pagination = createParamDecorator(
     const request = context.switchToHttp().getRequest();
     // Whatever logic you want to parse params in request
     const page = parseInt(request.query.page, 10) || 1;
-    const limit = parseInt(request.query.limit, 10) || 20;
+    let limit = parseInt(request.query.limit, 10) || 20;
+
+    if (limit > 100) limit = 100;
+
     return {
       limit: limit,
       skip: (page - 1) * limit,
