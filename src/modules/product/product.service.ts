@@ -51,7 +51,7 @@ export class ProductService {
 
   findAll(pagination: PaginationOptions, filter: ProductFilterDto) {
     const { page, limit } = pagination;
-    const { maxPrice, minPrice, name, sort } = filter;
+    const { maxPrice, minPrice, name, sort, style } = filter;
 
     const query = this.productRepository
       .createQueryBuilder('product')
@@ -77,6 +77,10 @@ export class ProductService {
 
     if (name) {
       query.andWhere('product.name LIKE :name', { name: `%${name}%` });
+    }
+
+    if (style) {
+      query.andWhere('product.style = :style', { style });
     }
 
     return query.getMany();

@@ -4,3 +4,7 @@ export enum SORT_PRODUCT_BY {
   PRICE_ASC = 'PRICE_ASC',
   PRICE_DESC = 'PRICE_DESC',
 }
+
+export enum PRODUCT_STYLE {
+  STYLE = 'STYLE',
+}

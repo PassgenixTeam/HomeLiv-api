@@ -43,6 +43,9 @@ export class ProductEntity extends BaseEntity {
   @Column({ type: 'boolean', default: false })
   isBestSeller: boolean;
 
+  @Column({ type: 'varchar', length: 100 })
+  style: string;
+
   @Column({ type: 'text' })
   @ObjectTransformToString()
   @StringTransformToObject()

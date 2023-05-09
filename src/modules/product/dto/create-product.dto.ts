@@ -1,11 +1,14 @@
+import { EnumTransform } from '@app/common';
 import { ApiProperty } from '@nestjs/swagger';
 import {
   IsBoolean,
+  IsEnum,
   IsNotEmpty,
   IsNumber,
   IsObject,
   IsString,
 } from 'class-validator';
+import { PRODUCT_STYLE } from 'src/modules/product/enum/product.enum';
 
 export class CreateProductDto {
   @ApiProperty({ type: String, example: 'Product name' })
@@ -51,6 +54,12 @@ export class CreateProductDto {
   @ApiProperty({ type: Boolean, example: false })
   @IsBoolean()
   isNew: boolean;
+
+  @ApiProperty({ type: String, enum: PRODUCT_STYLE })
+  @IsString()
+  @IsEnum(PRODUCT_STYLE)
+  @EnumTransform(PRODUCT_STYLE)
+  style: PRODUCT_STYLE;
 
   @ApiProperty({ type: Boolean, example: false })
   @IsBoolean()
