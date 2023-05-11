@@ -8,6 +8,12 @@ import { ProductEntity } from 'src/modules/product/entities/product.entity';
 import { DataSource, Repository } from 'typeorm';
 import { ProductCategoryService } from 'src/modules/product-category/product-category.service';
 import { PaginationOptions, isArray } from '@app/common';
+import {
+  decorateTheItems,
+  kindsOfLargeObjects,
+  lightAndDarkStyle,
+  marble,
+} from 'src/database/data-fake/data-fake';
 
 @Injectable()
 export class ProductService {
@@ -22,6 +28,14 @@ export class ProductService {
 
   async create(input: CreateProductDto) {
     const productInstance = plainToInstance(ProductEntity, input);
+
+    productInstance.marble = marble[this.random(marble.length)];
+    productInstance.lightAndDarkStyle =
+      lightAndDarkStyle[this.random(lightAndDarkStyle.length)];
+    productInstance.decorateTheItems =
+      decorateTheItems[this.random(decorateTheItems.length)];
+    productInstance.kindsOfLargeObjects =
+      kindsOfLargeObjects[this.random(kindsOfLargeObjects.length)];
 
     const queryRunner = this.dataSource.createQueryRunner();
 
@@ -51,20 +65,21 @@ export class ProductService {
 
   findAll(pagination: PaginationOptions, filter: ProductFilterDto) {
     const { page, limit } = pagination;
-    const { maxPrice, minPrice, name, sort, style, categoryIds } = filter;
+    const { maxPrice, minPrice, name, sort, style, categoryIds, roomType } =
+      filter;
 
     const query = this.productRepository
       .createQueryBuilder('product')
-      .select([
-        'product.id',
-        'product.name',
-        'product.price',
-        'product.thumbnailUrl',
-        'product.salePrice',
-        'product.isSale',
-        'product.createdAt',
-        'product.updatedAt',
-      ])
+      // .select([
+      //   'product.id',
+      //   'product.name',
+      //   'product.price',
+      //   'product.thumbnailUrl',
+      //   'product.salePrice',
+      //   'product.isSale',
+      //   'product.createdAt',
+      //   'product.updatedAt',
+      // ])
       .skip((page - 1) * limit)
       .take(limit);
 
@@ -81,6 +96,10 @@ export class ProductService {
 
     if (style) {
       query.andWhere('product.style = :style', { style });
+    }
+
+    if (roomType) {
+      query.andWhere('product.roomType = :roomType', { roomType });
     }
 
     if (categoryIds) {
@@ -130,6 +149,10 @@ export class ProductService {
       .delete()
       .where('id = :id', { id })
       .execute();
+  }
+
+  private random(max) {
+    return Math.floor(Math.random() * max);
   }
 }
 

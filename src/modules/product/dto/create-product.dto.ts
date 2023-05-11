@@ -8,7 +8,10 @@ import {
   IsObject,
   IsString,
 } from 'class-validator';
-import { PRODUCT_STYLE } from 'src/modules/product/enum/product.enum';
+import {
+  PRODUCT_STYLE,
+  ROOM_TYPE,
+} from 'src/modules/product/enum/product.enum';
 
 export class CreateProductDto {
   @ApiProperty({ type: String, example: 'Product name' })
@@ -72,4 +75,10 @@ export class CreateProductDto {
   @ApiProperty({ type: [String], format: 'uuid' })
   @IsString({ each: true })
   categoryIds: string[];
+
+  @ApiProperty({ type: String, enum: ROOM_TYPE })
+  @IsString()
+  @IsEnum(ROOM_TYPE)
+  @EnumTransform(ROOM_TYPE)
+  roomType: ROOM_TYPE;
 }

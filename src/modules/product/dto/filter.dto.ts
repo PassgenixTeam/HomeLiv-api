@@ -3,6 +3,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsEnum, IsOptional, IsString } from 'class-validator';
 import {
   PRODUCT_STYLE,
+  ROOM_TYPE,
   SORT_PRODUCT_BY,
 } from 'src/modules/product/enum/product.enum';
 
@@ -35,4 +36,11 @@ export class ProductFilterDto {
   @IsEnum(PRODUCT_STYLE)
   @EnumTransform(PRODUCT_STYLE)
   style: PRODUCT_STYLE;
+
+  @ApiProperty({ type: String, enum: ROOM_TYPE, required: false })
+  @IsString()
+  @IsOptional()
+  @IsEnum(ROOM_TYPE)
+  @EnumTransform(ROOM_TYPE)
+  roomType: ROOM_TYPE;
 }

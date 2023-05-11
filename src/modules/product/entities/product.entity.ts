@@ -46,6 +46,21 @@ export class ProductEntity extends BaseEntity {
   @Column({ type: 'varchar', length: 100 })
   style: string;
 
+  @Column({ type: 'varchar', length: 100, nullable: true })
+  roomType: string;
+
+  @Column({ type: 'varchar', length: 100, nullable: true })
+  marble: string;
+
+  @Column({ type: 'varchar', length: 100, nullable: true })
+  lightAndDarkStyle: string;
+
+  @Column({ type: 'varchar', length: 100, nullable: true })
+  decorateTheItems: string;
+
+  @Column({ type: 'varchar', length: 100, nullable: true })
+  kindsOfLargeObjects: string;
+
   @Column({ type: 'text' })
   @ObjectTransformToString()
   @StringTransformToObject()

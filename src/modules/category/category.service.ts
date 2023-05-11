@@ -5,6 +5,7 @@ import { CategoryEntity } from 'src/modules/category/entities/category.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { plainToInstance } from 'class-transformer';
+import { categories, myCategories } from 'src/database/data-fake/data-fake';
 
 @Injectable()
 export class CategoryService {
@@ -32,5 +33,14 @@ export class CategoryService {
 
   remove(id: number) {
     return `This action removes a #${id} category`;
+  }
+
+  initCategories() {
+    const data = myCategories.map((category) => ({
+      name: category,
+      thumbnailUrl: 'https://picsum.photos/seed/picsum/200/300',
+    }));
+
+    return this.categoryRepository.save(data);
   }
 }
