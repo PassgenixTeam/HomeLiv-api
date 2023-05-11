@@ -25,7 +25,7 @@ import { TransferMoneyDto } from './dto/transfer-money.dto';
 @ApiTags('stripe')
 @Controller('stripe')
 export class StripeController {
-  constructor(private readonly stripeService: StripeService) {}
+  constructor(private stripeService: StripeService) {}
 
   // @Get('create-checkout-session/:id')
   // async createCheckoutSession(@Param('id') id: string) {

@@ -13,12 +13,12 @@ import { PaginationOptions, isArray } from '@app/common';
 export class ProductService {
   constructor(
     @InjectRepository(ProductEntity)
-    private readonly productRepository: Repository<ProductEntity>,
-    private readonly productCategoryService: ProductCategoryService,
+    private productRepository: Repository<ProductEntity>,
+    private productCategoryService: ProductCategoryService,
     private dataSource: DataSource,
   ) {}
 
-  private readonly logger = new Logger(ProductService.name);
+  private logger = new Logger(ProductService.name);
 
   async create(input: CreateProductDto) {
     const productInstance = plainToInstance(ProductEntity, input);
@@ -51,7 +51,7 @@ export class ProductService {
 
   findAll(pagination: PaginationOptions, filter: ProductFilterDto) {
     const { page, limit } = pagination;
-    const { maxPrice, minPrice, name, sort, style } = filter;
+    const { maxPrice, minPrice, name, sort, style, categoryIds } = filter;
 
     const query = this.productRepository
       .createQueryBuilder('product')
@@ -81,6 +81,14 @@ export class ProductService {
 
     if (style) {
       query.andWhere('product.style = :style', { style });
+    }
+
+    if (categoryIds) {
+      query
+        .leftJoinAndSelect('product.productCategories', 'productCategories')
+        .andWhere('productCategories.categoryId IN (:...categoryIds)', {
+          categoryIds: categoryIds.split(',').map((item) => item.trim()),
+        });
     }
 
     return query.getMany();

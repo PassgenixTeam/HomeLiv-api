@@ -10,7 +10,7 @@ import { plainToInstance } from 'class-transformer';
 export class CartService {
   constructor(
     @InjectRepository(CartEntity)
-    private readonly cartRepository: Repository<CartEntity>,
+    private cartRepository: Repository<CartEntity>,
   ) {}
 
   create(input: CreateCartDto, userId: string) {

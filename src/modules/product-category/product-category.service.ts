@@ -11,9 +11,9 @@ import { CategoryEntity } from 'src/modules/category/entities/category.entity';
 export class ProductCategoryService {
   constructor(
     @InjectRepository(ProductCategoryEntity)
-    private readonly productCategoryRepository: Repository<ProductCategoryEntity>,
+    private productCategoryRepository: Repository<ProductCategoryEntity>,
     @InjectRepository(CategoryEntity)
-    private readonly categoryRepository: Repository<CategoryEntity>,
+    private categoryRepository: Repository<CategoryEntity>,
   ) {}
 
   create(input: CreateProductCategoryDto) {

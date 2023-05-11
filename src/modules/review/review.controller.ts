@@ -8,7 +8,7 @@ import { ROLE } from '@app/common';
 @ApiTags('Review')
 @Controller('review')
 export class ReviewController {
-  constructor(private readonly reviewService: ReviewService) {}
+  constructor(private reviewService: ReviewService) {}
 
   @Post()
   @Auth(ROLE.GUEST)

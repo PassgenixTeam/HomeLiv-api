@@ -18,7 +18,7 @@ import { ProfileResponseDto } from 'src/modules/user/dto/response/profile-respon
 @ApiTags('user')
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(private userService: UserService) {}
 
   @Get()
   findAll() {

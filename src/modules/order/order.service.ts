@@ -16,12 +16,12 @@ import { ORDER_STATUS } from 'src/modules/order/enums/order.enum';
 export class OrderService {
   constructor(
     @InjectRepository(OrderEntity)
-    private readonly orderRepository: Repository<OrderEntity>,
-    private readonly orderProductService: OrderProductService,
+    private orderRepository: Repository<OrderEntity>,
+    private orderProductService: OrderProductService,
     private dataSource: DataSource,
   ) {}
 
-  private readonly logger = new Logger(OrderService.name);
+  private logger = new Logger(OrderService.name);
 
   async create(input: CreateOrderDto, userId: string) {
     const orderInstance = plainToInstance(OrderEntity, input);

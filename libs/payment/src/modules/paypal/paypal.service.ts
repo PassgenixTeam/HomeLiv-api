@@ -12,7 +12,7 @@ export class PaypalService {
   private clientId = appConfig.payment.paypal.PAYPAL_CLIENT_ID;
   private clientSecret = appConfig.payment.paypal.PAYPAL_CLIENT_SECRET;
 
-  constructor(private readonly httpService: HttpService) {}
+  constructor(private httpService: HttpService) {}
 
   private async getAccessToken() {
     const { data } = await this.httpService.axiosRef({

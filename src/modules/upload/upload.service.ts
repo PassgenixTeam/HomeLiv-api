@@ -13,8 +13,8 @@ import { instanceToPlain } from 'class-transformer';
 export class UploadService {
   constructor(
     @InjectRepository(UploadEntity)
-    private readonly uploadEntity: Repository<UploadEntity>,
-    private readonly s3UploadService: S3UploadService,
+    private uploadEntity: Repository<UploadEntity>,
+    private s3UploadService: S3UploadService,
   ) {}
 
   @ResponseTransform<FilesDto>(FilesDto)

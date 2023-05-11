@@ -11,9 +11,9 @@ import { plainToInstance } from 'class-transformer';
 export class OrderProductService {
   constructor(
     @InjectRepository(OrderProductEntity)
-    private readonly orderProductRepository: Repository<OrderProductEntity>,
+    private orderProductRepository: Repository<OrderProductEntity>,
     @InjectRepository(ProductEntity)
-    private readonly productRepository: Repository<ProductEntity>,
+    private productRepository: Repository<ProductEntity>,
   ) {}
 
   async createMany(

@@ -11,6 +11,10 @@ export class ProductFilterDto {
   @IsOptional()
   name: string;
 
+  @ApiProperty({ type: String, required: false })
+  @IsOptional()
+  categoryIds: string;
+
   @ApiProperty({ type: Number, required: false })
   @IsOptional()
   minPrice: number;
@@ -27,6 +31,7 @@ export class ProductFilterDto {
 
   @ApiProperty({ type: String, enum: PRODUCT_STYLE, required: false })
   @IsString()
+  @IsOptional()
   @IsEnum(PRODUCT_STYLE)
   @EnumTransform(PRODUCT_STYLE)
   style: PRODUCT_STYLE;

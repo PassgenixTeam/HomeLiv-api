@@ -6,5 +6,8 @@ export enum SORT_PRODUCT_BY {
 }
 
 export enum PRODUCT_STYLE {
-  STYLE = 'STYLE',
+  MINIMALISM = 'Minimalism',
+  MODERN = 'Modern',
+  BRIGHT_ROOM = 'Bright room',
+  DARK_ROOM = 'Dark room',
 }

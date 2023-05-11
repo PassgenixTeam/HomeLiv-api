@@ -9,7 +9,7 @@ import { includes, isEmpty } from 'lodash';
 
 @Injectable()
 export class IpGuard implements CanActivate {
-  constructor(private readonly reflector: Reflector) {}
+  constructor(private reflector: Reflector) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const ips = this.reflector

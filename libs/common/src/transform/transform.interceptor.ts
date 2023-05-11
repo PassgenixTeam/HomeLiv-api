@@ -14,7 +14,7 @@ import { Response } from '../interfaces/response.interface';
 export class TransformInterceptor<T>
   implements NestInterceptor<T, Response<T>>
 {
-  private readonly logger = new Logger(TransformInterceptor.name);
+  private logger = new Logger(TransformInterceptor.name);
 
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     return next.handle().pipe(

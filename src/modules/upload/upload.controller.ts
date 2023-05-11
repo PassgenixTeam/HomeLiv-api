@@ -25,7 +25,7 @@ import { FileResponseDto } from 'src/modules/upload/dto/responses/files.response
 @ApiTags('uploads')
 @Controller('uploads')
 export class UploadController {
-  constructor(private readonly uploadService: UploadService) {}
+  constructor(private uploadService: UploadService) {}
 
   @ApiOperation({ summary: 'Get a upload all' })
   @Get('')

@@ -13,7 +13,7 @@ import { CreateAccountBankDto } from './dto/create-account-bank.dto';
 import { TransferMoneyDto } from './dto/transfer-money.dto';
 @Injectable()
 export class StripeService {
-  private readonly stripe: Stripe;
+  private stripe: Stripe;
 
   constructor() {
     this.stripe = new Stripe(appConfig.payment.stripe.STRIPE_SECRET_KEY, {

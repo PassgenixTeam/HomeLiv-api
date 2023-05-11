@@ -5,5 +5,5 @@ import { ApiTags } from '@nestjs/swagger';
 @ApiTags('Order Product')
 @Controller('order-product')
 export class OrderProductController {
-  constructor(private readonly orderProductService: OrderProductService) {}
+  constructor(private orderProductService: OrderProductService) {}
 }

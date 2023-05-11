@@ -10,7 +10,7 @@ import { plainToInstance } from 'class-transformer';
 export class ReviewService {
   constructor(
     @InjectRepository(ReviewEntity)
-    private readonly reviewRepository: Repository<ReviewEntity>,
+    private reviewRepository: Repository<ReviewEntity>,
   ) {}
 
   create(createReviewDto: CreateReviewDto, userId: string) {

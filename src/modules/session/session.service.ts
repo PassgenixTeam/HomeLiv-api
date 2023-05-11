@@ -12,8 +12,8 @@ import { RedisService } from '../../../libs/core/src/cache/redis.service';
 export class SessionService {
   constructor(
     @InjectRepository(SessionEntity)
-    private readonly sessionEntity: Repository<SessionEntity>,
-    private readonly redisService: RedisService,
+    private sessionEntity: Repository<SessionEntity>,
+    private redisService: RedisService,
   ) {}
 
   async create(createSessionDto: CreateSessionDto) {

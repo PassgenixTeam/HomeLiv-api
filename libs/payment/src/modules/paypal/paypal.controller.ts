@@ -16,7 +16,7 @@ import { CreatePayoutDto } from './dto/create-payout.dto';
 @ApiTags('paypal')
 @Controller('paypal')
 export class PaypalController {
-  constructor(private readonly paypalService: PaypalService) {}
+  constructor(private paypalService: PaypalService) {}
 
   @Get('get-order/:id')
   getOrder(@Param('id') id: string) {

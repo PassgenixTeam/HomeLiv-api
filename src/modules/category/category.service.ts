@@ -10,7 +10,7 @@ import { plainToInstance } from 'class-transformer';
 export class CategoryService {
   constructor(
     @InjectRepository(CategoryEntity)
-    private readonly categoryRepository: Repository<CategoryEntity>,
+    private categoryRepository: Repository<CategoryEntity>,
   ) {}
 
   create(createCategoryDto: CreateCategoryDto) {

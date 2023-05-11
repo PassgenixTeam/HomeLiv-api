@@ -14,9 +14,7 @@ import { ApiTags } from '@nestjs/swagger';
 @ApiTags('Product Category')
 @Controller('product-category')
 export class ProductCategoryController {
-  constructor(
-    private readonly productCategoryService: ProductCategoryService,
-  ) {}
+  constructor(private productCategoryService: ProductCategoryService) {}
 
   @Post()
   create(@Body() input: CreateProductCategoryDto) {

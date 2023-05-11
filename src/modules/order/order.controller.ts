@@ -10,7 +10,7 @@ import { OrderDetailDto } from 'src/modules/order/dto/response/detail-order-resp
 @ApiTags('Order')
 @Controller('order')
 export class OrderController {
-  constructor(private readonly orderService: OrderService) {}
+  constructor(private orderService: OrderService) {}
 
   @Post()
   @Auth()
