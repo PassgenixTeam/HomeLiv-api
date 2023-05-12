@@ -63,13 +63,15 @@ export class ProductService {
     }
   }
 
-  findAll(pagination: PaginationOptions, filter: ProductFilterDto) {
+  async findAll(pagination: PaginationOptions, filter: ProductFilterDto) {
     const { page, limit } = pagination;
     const { maxPrice, minPrice, name, sort, style, categoryIds, roomType } =
       filter;
 
     const query = this.productRepository
       .createQueryBuilder('product')
+      .leftJoinAndSelect('product.productCategories', 'productCategories')
+      .leftJoin('productCategories.category', 'category')
       // .select([
       //   'product.id',
       //   'product.name',
@@ -80,6 +82,7 @@ export class ProductService {
       //   'product.createdAt',
       //   'product.updatedAt',
       // ])
+      .addSelect(['category.id', 'category.name'])
       .skip((page - 1) * limit)
       .take(limit);
 
@@ -103,14 +106,34 @@ export class ProductService {
     }
 
     if (categoryIds) {
-      query
-        .leftJoinAndSelect('product.productCategories', 'productCategories')
-        .andWhere('productCategories.categoryId IN (:...categoryIds)', {
-          categoryIds: categoryIds.split(',').map((item) => item.trim()),
-        });
+      query.andWhere('productCategories.categoryId IN (:...categoryIds)', {
+        categoryIds: categoryIds.split(',').map((item) => item.trim()),
+      });
     }
 
-    return query.getMany();
+    const [data, total] = await query.getManyAndCount();
+
+    const products = data.map((product) => {
+      const categories = product.productCategories.map(
+        (productCategory) => productCategory.category,
+      );
+
+      delete product.productCategories;
+
+      return {
+        ...product,
+        thumbnails: isArray(product.thumbnails)
+          ? JSON.parse(product.thumbnails)
+          : [],
+        categories,
+      };
+    });
+
+    return {
+      data: products,
+      total,
+      currentPage: page,
+    };
   }
 
   async findOne(id: string) {
