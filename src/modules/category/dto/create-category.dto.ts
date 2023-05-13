@@ -9,4 +9,8 @@ export class CreateCategoryDto {
   @ApiProperty({ type: String })
   @IsOptional()
   thumbnailUrl: string;
+
+  @ApiProperty({ type: String })
+  @IsOptional()
+  prompt: string;
 }

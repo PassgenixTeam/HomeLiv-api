@@ -61,6 +61,9 @@ export class ProductEntity extends BaseEntity {
   @Column({ type: 'varchar', length: 100, nullable: true })
   kindsOfLargeObjects: string;
 
+  @Column({ type: 'varchar', length: 100, nullable: true })
+  prompt: string;
+
   @Column({ type: 'text' })
   @ObjectTransformToString()
   @StringTransformToObject()

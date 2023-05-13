@@ -6,6 +6,7 @@ import {
   IsNotEmpty,
   IsNumber,
   IsObject,
+  IsOptional,
   IsString,
 } from 'class-validator';
 import {
@@ -81,4 +82,8 @@ export class CreateProductDto {
   @IsEnum(ROOM_TYPE)
   @EnumTransform(ROOM_TYPE)
   roomType: ROOM_TYPE;
+
+  @ApiProperty({ type: String })
+  @IsOptional()
+  prompt: string;
 }

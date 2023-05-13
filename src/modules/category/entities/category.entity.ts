@@ -10,6 +10,9 @@ export class CategoryEntity extends BaseEntity {
   @Column({ type: 'varchar', length: 255, nullable: true })
   thumbnailUrl: string;
 
+  @Column({ type: 'varchar', length: 100, nullable: true })
+  prompt: string;
+
   // Relation
 
   @OneToMany(
