@@ -28,5 +28,5 @@ export enum ROOM_TYPE {
   LAUNDRY_ROOM = 'Laundry room',
   GAME_ROOM = 'Game room',
   SUNROOM = 'Sunroom',
-  STUDY = 'Study',
+  OFFICE_ROOM = 'Office room',
 }
